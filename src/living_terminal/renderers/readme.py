@@ -222,29 +222,7 @@ def render_readme_markdown(
     L.append("---")
     L.append("")
 
-    # ── 9. Run Locally ──
-    L.append("## ⚙️ How to Run Locally")
-    L.append("")
-    L.append("You can generate and preview the animated profile assets on your local machine:")
-    L.append("")
-    L.append("1. Clone the repository and navigate to the project directory.")
-    L.append("2. Install the package and dependencies in development mode:")
-    L.append("   ```bash")
-    L.append('   pip install -e "."')
-    L.append("   ```")
-    L.append("3. Execute the generator CLI:")
-    L.append("   ```bash")
-    L.append("   living-terminal")
-    L.append("   ```")
-    L.append("   Or run via Python:")
-    L.append("   ```bash")
-    L.append("   python tools/generate_profile.py")
-    L.append("   ```")
-    L.append("")
-    L.append("---")
-    L.append("")
-
-    # ── 10. Footer ──
+    # ── 9. Footer ──
     L.append('<div align="center">')
     L.append("")
     L.append("────────────────────────────────────────────────────────────────────────")

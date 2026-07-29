@@ -111,7 +111,6 @@
 - [x] RAG
 - [x] AI Agents
 - [x] Prompt Optimization
-- [x] WorldQuant Brain
 - [x] Backend Engineering
 - [x] System Design
 - [x] AWS
@@ -142,8 +141,6 @@
     ◆ Advanced algorithmic architectures and engineering models.
 ▸ **Prompt Optimization**
     ◆ Advanced algorithmic architectures and engineering models.
-▸ **WorldQuant Alpha Research**
-    ◆ Advanced algorithmic architectures and engineering models.
 ▸ **Backend Architecture**
     ◆ Advanced algorithmic architectures and engineering models.
 ▸ **System Design**
@@ -151,30 +148,10 @@
 
 ---
 
-## ⚙️ How to Run Locally
-
-You can generate and preview the animated profile assets on your local machine:
-
-1. Clone the repository and navigate to the project directory.
-2. Install the package and dependencies in development mode:
-   ```bash
-   pip install -e "."
-   ```
-3. Execute the generator CLI:
-   ```bash
-   living-terminal
-   ```
-   Or run via Python:
-   ```bash
-   python tools/generate_profile.py
-   ```
-
----
-
 <div align="center">
 
 ────────────────────────────────────────────────────────────────────────
 Living Terminal • v2.0 • © 2026 Sarthak Pandey
-<sub>🕐 Last updated: 2026-07-29 10:18 UTC · Generated dynamically</sub>
+<sub>🕐 Last updated: 2026-07-29 10:25 UTC · Generated dynamically</sub>
 
 </div>

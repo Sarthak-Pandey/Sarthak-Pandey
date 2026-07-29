@@ -92,7 +92,6 @@ def load_learning(learning_path: Path | str = "assets/learning.json") -> List[st
             "Retrieval-Augmented Generation (RAG)",
             "AI Agents",
             "Prompt Optimization",
-            "WorldQuant Brain",
             "Backend Engineering",
             "System Design",
             "AWS",

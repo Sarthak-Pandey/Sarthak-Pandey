@@ -16,7 +16,6 @@ branding:
     - Backend Developer
     - Full Stack Developer
     - Open Source Learner
-    - Quant Research Enthusiast
     - Lifelong Learner
 
 focus_rows:
@@ -29,7 +28,6 @@ focus_rows:
   - ["Cloud", "AWS"]
   - ["DevOps", "Docker • GitHub Actions"]
   - ["Learning", "LangGraph • MCP • RAG"]
-  - ["Research", "WorldQuant Brain"]
 
 skills:
   languages:
@@ -84,7 +82,6 @@ research_interests:
   - Retrieval-Augmented Generation
   - Prompt Engineering
   - Prompt Optimization
-  - WorldQuant Alpha Research
   - Backend Architecture
   - System Design
 
