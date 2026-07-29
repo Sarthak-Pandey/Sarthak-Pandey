@@ -70,12 +70,6 @@ skills:
     - GitHub Actions
     - AWS
 
-projects:
-  - Living Terminal
-  - AI Core Search (Perplexity-style AI Search Engine)
-  - Prompt Optimizer
-  - Moodify
-
 research_interests:
   - Large Language Models
   - AI Agents

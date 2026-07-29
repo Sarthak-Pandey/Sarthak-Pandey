@@ -32,7 +32,6 @@ def render_panel_svg(
     current_time: str | None = None
 ) -> str:
     width = 860
-    height = 840
 
     if current_time is None:
         current_time = datetime.now(timezone.utc).strftime("%H:%M UTC · %Y-%m-%d")
@@ -40,8 +39,8 @@ def render_panel_svg(
     svg: list[str] = []
     svg.append(
         f'<svg xmlns="http://www.w3.org/2000/svg" '
-        f'width="{width}" height="{height}" '
-        f'viewBox="0 0 {width} {height}">'
+        f'width="{width}" height="__SVG_HEIGHT__" '
+        f'viewBox="0 0 {width} __SVG_HEIGHT__">'
     )
 
     # ── Definitions & Styles ──
@@ -125,13 +124,18 @@ def render_panel_svg(
     svg.append(f'    <text x="{width // 2}" y="{by}" class="mono" font-size="13" fill="{theme.text_muted}" text-anchor="middle">{esc(config.branding.tagline)}</text>')
     by += 24
 
-    tag_x_start = width // 2 - 250
+    num_roles = len(config.branding.roles)
+    tag_w = 120
+    tag_gap = 12
+    total_tag_w = num_roles * tag_w + (num_roles - 1) * tag_gap
+    tag_x_start = width // 2 - total_tag_w // 2
+
     tag_colors = [theme.accent_blue, theme.accent_green, theme.accent_purple, theme.accent_pink, theme.accent_orange, theme.accent_red]
-    for idx, role in enumerate(config.branding.roles[:6]):
-        tx = tag_x_start + idx * 140
+    for idx, role in enumerate(config.branding.roles):
+        tx = tag_x_start + idx * (tag_w + tag_gap)
         tc = tag_colors[idx % len(tag_colors)]
-        svg.append(f'    <rect x="{tx}" y="{by - 10}" width="130" height="18" rx="9" fill="{tc}" fill-opacity="0.1" stroke="{tc}" stroke-width="0.5" stroke-opacity="0.4"/>')
-        svg.append(f'    <text x="{tx + 65}" y="{by + 3}" class="mono" font-size="9" fill="{tc}" text-anchor="middle">{esc(role)}</text>')
+        svg.append(f'    <rect x="{tx}" y="{by - 10}" width="{tag_w}" height="18" rx="9" fill="{tc}" fill-opacity="0.1" stroke="{tc}" stroke-width="0.5" stroke-opacity="0.4"/>')
+        svg.append(f'    <text x="{tx + tag_w // 2}" y="{by + 3}" class="mono" font-size="9" fill="{tc}" text-anchor="middle">{esc(role)}</text>')
 
     svg.append('  </g>')
 
@@ -255,7 +259,8 @@ def render_panel_svg(
 
     svg.append('</svg>')
 
-    content = "\n".join(svg)
+    final_height = y + 45
+    content = "\n".join(svg).replace("__SVG_HEIGHT__", str(final_height))
     out_file = Path(output_path)
     with open(out_file, "w", encoding="utf-8") as f:
         f.write(content)

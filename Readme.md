@@ -35,14 +35,14 @@
 
 <table>
 <tr>
-<td valign="top">
+<td valign="middle">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./portrait-dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="./portrait-light.svg">
     <img alt="Developer Portrait" src="./portrait-dark.svg" width="350">
   </picture>
 </td>
-<td valign="top">
+<td valign="middle">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./sysinfo-dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="./sysinfo-light.svg">
@@ -118,17 +118,6 @@
 
 ---
 
-## 🚀 Current Projects
-
-| Project | Status | Description |
-| :--- | :---: | :--- |
-| **Living Terminal** | 🔨 In Progress | Terminal-style animated profile configuration and automation. |
-| **AI Core Search** | 🔨 In Progress | Aspiring AI Engineer project development. |
-| **Prompt Optimizer** | 🔨 In Progress | Aspiring AI Engineer project development. |
-| **Moodify** | 🔨 In Progress | Aspiring AI Engineer project development. |
-
----
-
 ## 🔬 Research Interests
 
 ▸ **Large Language Models**
@@ -152,6 +141,6 @@
 
 ────────────────────────────────────────────────────────────────────────
 Living Terminal • v2.0 • © 2026 Sarthak Pandey
-<sub>🕐 Last updated: 2026-07-29 10:25 UTC · Generated dynamically</sub>
+<sub>🕐 Last updated: 2026-07-29 10:32 UTC · Generated dynamically</sub>
 
 </div>

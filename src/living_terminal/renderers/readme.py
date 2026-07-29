@@ -120,14 +120,14 @@ def render_readme_markdown(
     L.append("")
     L.append("<table>")
     L.append("<tr>")
-    L.append('<td valign="top">')
+    L.append('<td valign="middle">')
     L.append('  <picture>')
     L.append('    <source media="(prefers-color-scheme: dark)" srcset="./portrait-dark.svg">')
     L.append('    <source media="(prefers-color-scheme: light)" srcset="./portrait-light.svg">')
     L.append('    <img alt="Developer Portrait" src="./portrait-dark.svg" width="350">')
     L.append('  </picture>')
     L.append("</td>")
-    L.append('<td valign="top">')
+    L.append('<td valign="middle">')
     L.append('  <picture>')
     L.append('    <source media="(prefers-color-scheme: dark)" srcset="./sysinfo-dark.svg">')
     L.append('    <source media="(prefers-color-scheme: light)" srcset="./sysinfo-light.svg">')
@@ -198,20 +198,7 @@ def render_readme_markdown(
     L.append("---")
     L.append("")
 
-    # ── 7. Current Projects ──
-    L.append("## 🚀 Current Projects")
-    L.append("")
-    L.append("| Project | Status | Description |")
-    L.append("| :--- | :---: | :--- |")
-    for proj in (config.projects or []):
-        clean = re.sub(r"\s*\([^)]*\)", "", proj).strip() if "(" in proj else proj
-        desc = "Terminal-style animated profile configuration and automation." if "Living Terminal" in clean else "Aspiring AI Engineer project development."
-        L.append(f"| **{clean}** | 🔨 In Progress | {desc} |")
-    L.append("")
-    L.append("---")
-    L.append("")
-
-    # ── 8. Research Interests ──
+    # ── 7. Research Interests ──
     L.append("## 🔬 Research Interests")
     L.append("")
     research = config.research_interests or []

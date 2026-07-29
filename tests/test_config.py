@@ -12,7 +12,7 @@ def test_load_config():
     assert config.developer.github_username == "Sarthak-Pandey"
     assert config.developer.title == "AI Engineer"
     assert len(config.focus_rows) >= 8
-    assert len(config.projects) >= 4
+    assert len(config.projects) == 0
 
 
 def test_load_learning():
