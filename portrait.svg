@@ -1,63 +1,95 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="516.0" height="716" viewBox="0 0 516.0 716">
-  <rect width="100%" height="100%" fill="#0d1117" rx="8"/>
-  <g font-family="monospace" font-size="10" fill="#58a6ff">
-    <text x="10" y="15" xml:space="preserve">                                                                                </text>
-    <text x="10" y="27" xml:space="preserve">                                                                                </text>
-    <text x="10" y="39" xml:space="preserve">                                                                                </text>
-    <text x="10" y="51" xml:space="preserve">                                                                                </text>
-    <text x="10" y="63" xml:space="preserve">                                  .,:::,'                                       </text>
-    <text x="10" y="75" xml:space="preserve">                                .+XOOOOOX+,'                                    </text>
-    <text x="10" y="87" xml:space="preserve">                               'xOXx**+*xO#+'                                   </text>
-    <text x="10" y="99" xml:space="preserve">                               .Ox;::::::*#X'                                   </text>
-    <text x="10" y="111" xml:space="preserve">                               '+x*x+;**++X*'                                   </text>
-    <text x="10" y="123" xml:space="preserve">                                :~~~~:;;;;+;'                                   </text>
-    <text x="10" y="135" xml:space="preserve">                             '.:~~:+*+~;:~+:'                                   </text>
-    <text x="10" y="147" xml:space="preserve">                          '.:+xxxX*x~;~+~+,'                                    </text>
-    <text x="10" y="159" xml:space="preserve">                        ',;+*****xx*+~~~*+.                                     </text>
-    <text x="10" y="171" xml:space="preserve">                     '.:;~+++*++*xXXX***~~x,'     ..'                           </text>
-    <text x="10" y="183" xml:space="preserve">                    .:;;;;~++****XX**~~;;:*x~~:,,;*:                            </text>
-    <text x="10" y="195" xml:space="preserve">                  ',;;;;~~~*+*x*X~:;;;:,.:xx*XXxX*+:'                           </text>
-    <text x="10" y="207" xml:space="preserve">                 ',;~~+++*xX*XXOO:.'....:xOOXxxxXXx**;'                         </text>
-    <text x="10" y="219" xml:space="preserve">                 ,;~++++*xXXxxxOX,....,,,*XOXx*xXX*xX*~'                        </text>
-    <text x="10" y="231" xml:space="preserve">                ';~++*+*xXOXxxxO+.,...,,.~**xx*xXX*xX*~'                        </text>
-    <text x="10" y="243" xml:space="preserve">                ';~+**+*OOXXxxx*,,,..,,,.,**Xx+*XXXOx*;                         </text>
-    <text x="10" y="255" xml:space="preserve">                '~~+++++OOXXxx*:.,,....,.:O+xX++XXXOX*+'                        </text>
-    <text x="10" y="267" xml:space="preserve">                ';~+++~+OOXxXx*:.,,..,,,.;#XXX+*XXXXx+*.                        </text>
-    <text x="10" y="279" xml:space="preserve">                 .~+++~+XOx*Xx*:.,,..,,,.~OOXX+*XxOXx+x;                        </text>
-    <text x="10" y="291" xml:space="preserve">                 ':+++~*XO**Xxx;.:,..,,..+OOOx+xXXOXx+x*'                       </text>
-    <text x="10" y="303" xml:space="preserve">                  ':+++xOX*xXxx;.:,...,..*XXOx+xxxXXx+*x.                       </text>
-    <text x="10" y="315" xml:space="preserve">                    ,~+xOx+xXxX~,:,...,..xXxOx*XxXXXx+*x:                       </text>
-    <text x="10" y="327" xml:space="preserve">                     '~xOx*xXxX~,;,..,,.,xx*X**xxXXXx+xx;                       </text>
-    <text x="10" y="339" xml:space="preserve">                      ,XO**XXxX~:;,.,,,.,XX*OxxXXXOOx*xX~'                      </text>
-    <text x="10" y="351" xml:space="preserve">                      .XO*xXXxX~;;..,,,.:Xx*X*xxxXOX**xx+'                      </text>
-    <text x="10" y="363" xml:space="preserve">                      .XO*xXXxX*;:..,,,,;OxxOxxXXOOXxxXXX.                      </text>
-    <text x="10" y="375" xml:space="preserve">                      .xX*xXxxX*;:..,,,,;X*xx**xX#Xx+xXx:'                      </text>
-    <text x="10" y="387" xml:space="preserve">                      ,XOXXXxXOx;,...,,,+X*xXxxXOOOxxXX;                        </text>
-    <text x="10" y="399" xml:space="preserve">                      ';*xXx*xXX;,,,.,,,+X*xx**Xx;;~*x+.                        </text>
-    <text x="10" y="411" xml:space="preserve">                        ,*O*XXOX;.,:,,,.+XxXOxxX;,:;.''                         </text>
-    <text x="10" y="423" xml:space="preserve">                        ,~x*xXx*,,,:,,,.+X*XOOX;,:;,''                          </text>
-    <text x="10" y="435" xml:space="preserve">                        .;~XXO~;:.,:,,,:+X*XOX~::;;.''                          </text>
-    <text x="10" y="447" xml:space="preserve">                        ';;*XXO~,,,::::,;xxxx~::;;:'''                          </text>
-    <text x="10" y="459" xml:space="preserve">                         :~;xXx:.,,,,,,:~x**+;:;++.'''                          </text>
-    <text x="10" y="471" xml:space="preserve">                         ,**xxx******xXXXXXXxx***x,'..'                         </text>
-    <text x="10" y="483" xml:space="preserve">                         .XXXXxXXXXXxXXOOXXxxXXxxX:',,.''                       </text>
-    <text x="10" y="495" xml:space="preserve">                         '*XxxxXXXXOXOOOOXXxx*xxxX;'.,,..'                      </text>
-    <text x="10" y="507" xml:space="preserve">                          +xxXxXXXXXXXOOXXxx**x*xX;''.,,,.'                     </text>
-    <text x="10" y="519" xml:space="preserve">                         .*XXXxXXXXXXOOOOOXx**x*xX;''.,,,,.'                    </text>
-    <text x="10" y="531" xml:space="preserve">                         .xXXXXXXXOOOOOOOOXxx**xxx;'.,,,,.''                    </text>
-    <text x="10" y="543" xml:space="preserve">                         .XXXXXXXOOOO#OO#OXXx***xx~......'''                    </text>
-    <text x="10" y="555" xml:space="preserve">                         '*OXXXxXOOOOOOO#OXXx*++*x~'....'''                     </text>
-    <text x="10" y="567" xml:space="preserve">                          :XXXXxXOOOOOOO##XXx*~~*x;''''''                       </text>
-    <text x="10" y="579" xml:space="preserve">                          .*XxxxxXOOO#OOO#Xx*+~~+x;''''                         </text>
-    <text x="10" y="591" xml:space="preserve">                          ';xxxx*XOOx*O#OOXx*+~~+x:'                            </text>
-    <text x="10" y="603" xml:space="preserve">                          ':**xxxXOO+ :X#OOX*+~;~x,                             </text>
-    <text x="10" y="615" xml:space="preserve">                          ':x**xxXXO,  '~OOXx*~~+x*'                            </text>
-    <text x="10" y="627" xml:space="preserve">                           :xxxxXOO;'    ,XOX*~;+*X+'                           </text>
-    <text x="10" y="639" xml:space="preserve">                           ,xxxxXOx.      ;OOX*~~*XO:                           </text>
-    <text x="10" y="651" xml:space="preserve">                           .*xXXOOX,      .OOXx++XXX,                           </text>
-    <text x="10" y="663" xml:space="preserve">                           '+**xXOO;      .XXxx*+xX;                            </text>
-    <text x="10" y="675" xml:space="preserve">                            ~xx*xXX+      'XX*x***;                             </text>
-    <text x="10" y="687" xml:space="preserve">                           '+XXxxXOx'     '*X**xx*,                             </text>
-    <text x="10" y="699" xml:space="preserve">                           ,XOXXXXOx:      :OXxXXx,                             </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="526.0" height="726" viewBox="0 0 526.0 726">
+  <defs>
+    <linearGradient id="portraitGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#58a6ff" stop-opacity="0.8"/>
+      <stop offset="40%" stop-color="#58a6ff" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#d2a8ff" stop-opacity="0.3"/>
+    </linearGradient>
+    <filter id="portraitGlow" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur stdDeviation="1" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <mask id="scanReveal">
+      <rect width="100%" height="100%" fill="white">
+        <animate attributeName="height" from="0%" to="100%" dur="1.5s" begin="0.3s" fill="freeze"/>
+      </rect>
+    </mask>
+    <clipPath id="roundedClip">
+      <rect width="100%" height="100%" rx="10"/>
+    </clipPath>
+  </defs>
+  <style>
+    .mono { font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace; }
+    @keyframes borderShimmer {
+      0%,100% { stroke: #58a6ff; stroke-opacity: 0.15; }
+      50% { stroke: #d2a8ff; stroke-opacity: 0.35; }
+    }
+  </style>
+  <rect width="100%" height="100%" rx="10" fill="#0d1117"/>
+  <rect width="100%" height="100%" rx="10" fill="none" stroke="#58a6ff" stroke-width="1" stroke-opacity="0.15" style="animation: borderShimmer 4s ease-in-out infinite;"/>
+  <g clip-path="url(#roundedClip)" mask="url(#scanReveal)">
+    <g class="mono" font-size="10" fill="url(#portraitGrad)" filter="url(#portraitGlow)">
+      <text x="12" y="15" xml:space="preserve">                                                                                </text>
+      <text x="12" y="27" xml:space="preserve">                                                                                </text>
+      <text x="12" y="39" xml:space="preserve">                                                                                </text>
+      <text x="12" y="51" xml:space="preserve">                                                                                </text>
+      <text x="12" y="63" xml:space="preserve">                                  I+[}-&gt;^                                       </text>
+      <text x="12" y="75" xml:space="preserve">                                ;Yko*###dz_.                                    </text>
+      <text x="12" y="87" xml:space="preserve">                               &apos;0WkZQJXJZM%u&apos;                                   </text>
+      <text x="12" y="99" xml:space="preserve">                               :o0/}]]][{Y8p^                                   </text>
+      <text x="12" y="111" xml:space="preserve">                               .zOL0Y|J0YudY.                                   </text>
+      <text x="12" y="123" xml:space="preserve">                                ]rfrn?||)1X1&apos;                                   </text>
+      <text x="12" y="135" xml:space="preserve">                             &apos;l[rf-uCvr)[nv-&apos;                                   </text>
+      <text x="12" y="147" xml:space="preserve">                          &apos;l{c0wZpJ0n/rurX~&apos;                                    </text>
+      <text x="12" y="159" xml:space="preserve">                        ,_/zLQCUCqqCzntrJu;                                     </text>
+      <text x="12" y="171" xml:space="preserve">                     .I?)juvXYXYCwappLLUxfZ_&apos;     :l.                           </text>
+      <text x="12" y="183" xml:space="preserve">                    ,?||))fcXYCCCbaLJnjt({CZxj{+&lt;|L?                            </text>
+      <text x="12" y="195" xml:space="preserve">                  .&gt;1||/tfnYYLqLpj?(|)]~!]mOJbpmpQc[^                           </text>
+      <text x="12" y="207" xml:space="preserve">                 .+|fnvvuUqpQppM*?:,;lII-ZMWbqOwhk0JJ1&quot;                         </text>
+      <text x="12" y="219" xml:space="preserve">                 itxzXcv0wak0qm*b+!Ill&gt;&gt;_LbobmJwbhQqaLf.                        </text>
+      <text x="12" y="231" xml:space="preserve">                `)jXYYvCwp*k0w0*cl&lt;l!li&lt;!r00qwYOkhLZbLn&apos;                        </text>
+      <text x="12" y="243" xml:space="preserve">                ,trXYYvL#*bdOw0Cii&lt;l!&gt;&gt;&lt;l_LJpmzQkhp*wY1                         </text>
+      <text x="12" y="255" xml:space="preserve">                ^trXYYucMMkpqwJ-I&lt;&gt;l!l!&gt;l-*zmpXYbdp#dCv&apos;                        </text>
+      <text x="12" y="267" xml:space="preserve">                .1jvzznvoMpwpZU?!+&lt;!!&gt;&gt;&lt;;)&amp;bphXLhpkkZX0l                        </text>
+      <text x="12" y="279" xml:space="preserve">                 !fuvuxXkMw0pmL[!_&gt;!!&lt;~i:r**kbcQdm*hqXw)                        </text>
+      <text x="12" y="291" xml:space="preserve">                 .-vvvxCaoL0bmZ1l?ilii&lt;!:zM#WqcOppopZvZU.                       </text>
+      <text x="12" y="303" xml:space="preserve">                  .?zzvO*kJZbZq|!]iI!!&gt;l;Ukdo0vmOwhbwv0Zl                       </text>
+      <text x="12" y="315" xml:space="preserve">                    &lt;ncw#qYqkwbt&gt;}illi~lIOawaOUpwhakmvLm]                       </text>
+      <text x="12" y="327" xml:space="preserve">                     ,fq*OJqbZdj+{i!!&lt;~!iOwCkCJmZkaamcOw)                       </text>
+      <text x="12" y="339" xml:space="preserve">                      &gt;pWCQbhqhx?)i!i&lt;~!+kdQoOmbkh*oZYqbr.                      </text>
+      <text x="12" y="351" xml:space="preserve">                      lpoYmbpOdn1(!li&gt;~!?pZLaQ0wma*aQJqZc,                      </text>
+      <text x="12" y="363" xml:space="preserve">                      !b*YwhdwhY/{II&gt;&gt;&lt;i)aZZomqkp&amp;#aOmkkp;                      </text>
+      <text x="12" y="375" xml:space="preserve">                      !qd0qbOZdQ|?;;i&lt;&lt;i/pQZq0LZp&amp;hmXOdq{.                      </text>
+      <text x="12" y="387" xml:space="preserve">                      id*pbbOboO|+lI!~&lt;&gt;vaQwbmOb*W*qmhd|                        </text>
+      <text x="12" y="399" xml:space="preserve">                      `|Cmd00qbk/&gt;&gt;~!&gt;&lt;~zdQmOYJam||rLZz,                        </text>
+      <text x="12" y="411" xml:space="preserve">                        +LaQpa*b1i~]&lt;&gt;~!zkOd*wwk1_](i&apos;&apos;                         </text>
+      <text x="12" y="423" xml:space="preserve">                        itZLmbqU_i+[~+&gt;IzbQbM*h/_[/_&apos;&apos;                          </text>
+      <text x="12" y="435" xml:space="preserve">                        l)nhhox(]!~]__i?cb0babj?[/|l,&apos;                          </text>
+      <text x="12" y="447" xml:space="preserve">                        ,/(0ahMx++_]]?-~1w0OOx[}((-&quot;&quot;.                          </text>
+      <text x="12" y="459" xml:space="preserve">                         {t|mdw];i&lt;__++]xwQ0v)}(vzI`&quot;`                          </text>
+      <text x="12" y="471" xml:space="preserve">                         +JJOqZCYUUCLwphhkppqOJCCZ~,;l^                         </text>
+      <text x="12" y="483" xml:space="preserve">                         !bhbpqbbbkhZpa*adbmZppqOp{&quot;iiI,&apos;                       </text>
+      <text x="12" y="495" xml:space="preserve">                         &apos;CpwOmbhkh#aM*o*hdw0L0OZk(&apos;l&lt;ilI^                      </text>
+      <text x="12" y="507" xml:space="preserve">                          vwqpwphhbhdb**hbqOLC00md(.&quot;!&lt;&lt;i!&quot;                     </text>
+      <text x="12" y="519" xml:space="preserve">                         :Jbkpmpdkadpo#*#opO0QO0Zd)&apos;&quot;I&gt;+_&gt;;.                    </text>
+      <text x="12" y="531" xml:space="preserve">                         !qhbdpaahao#WM#M*bw0YQZZq|&quot;;ii&gt;&lt;I,&apos;                    </text>
+      <text x="12" y="543" xml:space="preserve">                         Ipkkkbhha***&amp;W#&amp;#kpwJUCOqt,Ii!I;,`.                    </text>
+      <text x="12" y="555" xml:space="preserve">                         &apos;Jakbpqb*#*aWWW8&amp;bpwYuvCwt,:;;:&quot;`.                     </text>
+      <text x="12" y="567" xml:space="preserve">                          [dpppZpo**oWWW8&amp;kpqUnxJw/&quot;^^&quot;`.                       </text>
+      <text x="12" y="579" xml:space="preserve">                          lUpwwOOa*o#&amp;WWW&amp;bOQXxrzm)^&apos;..                         </text>
+      <text x="12" y="591" xml:space="preserve">                          ,|qOOmQbWaqJM&amp;WWkOJzrfvq{.                            </text>
+      <text x="12" y="603" xml:space="preserve">                          &apos;?00Owmpo#X ?p8MopLXjtnw~                             </text>
+      <text x="12" y="615" xml:space="preserve">                          .?000Zmbko+  &quot;xa#hOYjtumJ^                            </text>
+      <text x="12" y="627" xml:space="preserve">                           ]ZOOOp*o/.    ib*dCt/vLaX^                           </text>
+      <text x="12" y="639" xml:space="preserve">                           _Omwmpoq;      /&amp;*dCfn0ko]                           </text>
+      <text x="12" y="651" xml:space="preserve">                           ILqbha*k+      l##bwXcphbi                           </text>
+      <text x="12" y="663" xml:space="preserve">                           `X0Lmb##/      :ahmmYu0k(                            </text>
+      <text x="12" y="675" xml:space="preserve">                            tqOQmbhu      ,hp0OQJJ1                             </text>
+      <text x="12" y="687" xml:space="preserve">                           `vkpwqboZ,     &apos;JaLL0OQ&lt;                             </text>
+      <text x="12" y="699" xml:space="preserve">                           +doakbk*q-      {Wkqdpq&lt;                             </text>
+    </g>
   </g>
 </svg>

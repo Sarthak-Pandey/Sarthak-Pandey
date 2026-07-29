@@ -1,5 +1,6 @@
 from pathlib import Path
 from typing import List
+
 try:
     from PIL import Image
     HAS_PIL = True
@@ -7,17 +8,19 @@ except ImportError:
     Image = None
     HAS_PIL = False
 
-GLYPHS = " '.,:;~+*xXO#"
+# Extended character set for richer ASCII gradients
+GLYPHS = " .'`^\",:;Il!i><~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
+
 INPUT_IMAGE = Path("assets/photo-ready.png")
 FALLBACK_IMAGE = Path("assets/me.jpg")
+
 WIDTH = 80
 FONT_SIZE = 10
 LINE_HEIGHT = 12
-TEXT_COLOR = "#58a6ff"
 BACKGROUND = "#0d1117"
 
 
-def image_to_ascii(image: Image.Image) -> List[str]:
+def image_to_ascii(image: "Image.Image") -> List[str]:
     w, h = image.size
     aspect_ratio = h / w
     new_height = int(WIDTH * aspect_ratio * 0.55)
@@ -26,7 +29,7 @@ def image_to_ascii(image: Image.Image) -> List[str]:
     img = img.convert("L")
 
     pixels = img.load()
-    rows = []
+    rows: list[str] = []
 
     for y in range(img.height):
         row = ""
@@ -42,13 +45,36 @@ def image_to_ascii(image: Image.Image) -> List[str]:
 
 def build_fallback_ascii() -> List[str]:
     return [
-        "      .----------------------------------------.      ",
-        "     /  +------------------------------------+  \\     ",
-        "    |  |  sarthak@ai-terminal:~$ whoami     |  |    ",
-        "    |  |  Sarthak Pandey - AI Engineer      |  |    ",
-        "    |  +------------------------------------+  |    ",
-        "     \\________________________________________/     ",
+        "                                                                                ",
+        "      ╔══════════════════════════════════════════════════════════════════╗        ",
+        "      ║                                                                ║        ",
+        "      ║     ███████╗ █████╗ ██████╗ ████████╗██╗  ██╗ █████╗ ██╗  ██╗  ║        ",
+        "      ║     ██╔════╝██╔══██╗██╔══██╗╚══██╔══╝██║  ██║██╔══██╗██║ ██╔╝  ║        ",
+        "      ║     ███████╗███████║██████╔╝   ██║   ███████║███████║█████╔╝   ║        ",
+        "      ║     ╚════██║██╔══██║██╔══██╗   ██║   ██╔══██║██╔══██║██╔═██╗   ║        ",
+        "      ║     ███████║██║  ██║██║  ██║   ██║   ██║  ██║██║  ██║██║  ██╗  ║        ",
+        "      ║     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝  ║        ",
+        "      ║                                                                ║        ",
+        "      ║            A I   E N G I N E E R                               ║        ",
+        "      ║                                                                ║        ",
+        "      ╚══════════════════════════════════════════════════════════════════╝        ",
+        "                                                                                ",
     ]
+
+
+def _esc(ch: str) -> str:
+    """Escape XML-sensitive characters."""
+    if ch == "&":
+        return "&amp;"
+    if ch == "<":
+        return "&lt;"
+    if ch == ">":
+        return "&gt;"
+    if ch == '"':
+        return "&quot;"
+    if ch == "'":
+        return "&apos;"
+    return ch
 
 
 def render_portrait_svg(output_path: Path | str = "portrait.svg") -> str:
@@ -59,39 +85,77 @@ def render_portrait_svg(output_path: Path | str = "portrait.svg") -> str:
                 image = Image.open(INPUT_IMAGE)
             except Exception:
                 pass
-
         if image is None and FALLBACK_IMAGE.exists():
             try:
                 image = Image.open(FALLBACK_IMAGE)
             except Exception:
                 pass
 
-    if image is not None:
-        rows = image_to_ascii(image)
-    else:
-        rows = build_fallback_ascii()
+    rows = image_to_ascii(image) if image is not None else build_fallback_ascii()
 
-    width = WIDTH * FONT_SIZE * 0.62 + 20
-    height = len(rows) * LINE_HEIGHT + 20
+    svg_w = WIDTH * FONT_SIZE * 0.62 + 30
+    svg_h = len(rows) * LINE_HEIGHT + 30
 
-    svg = []
+    svg: list[str] = []
     svg.append(
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">'
+        f'<svg xmlns="http://www.w3.org/2000/svg" '
+        f'width="{svg_w}" height="{svg_h}" '
+        f'viewBox="0 0 {svg_w} {svg_h}">'
     )
-    svg.append(f'  <rect width="100%" height="100%" fill="{BACKGROUND}" rx="8"/>')
-    svg.append(f'  <g font-family="monospace" font-size="{FONT_SIZE}" fill="{TEXT_COLOR}">')
+
+    # ── Definitions ──
+    svg.append("""  <defs>
+    <linearGradient id="portraitGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#58a6ff" stop-opacity="0.8"/>
+      <stop offset="40%" stop-color="#58a6ff" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#d2a8ff" stop-opacity="0.3"/>
+    </linearGradient>
+    <filter id="portraitGlow" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur stdDeviation="1" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <mask id="scanReveal">
+      <rect width="100%" height="100%" fill="white">
+        <animate attributeName="height" from="0%" to="100%" dur="1.5s" begin="0.3s" fill="freeze"/>
+      </rect>
+    </mask>
+    <clipPath id="roundedClip">
+      <rect width="100%" height="100%" rx="10"/>
+    </clipPath>
+  </defs>""")
+
+    svg.append("""  <style>
+    .mono { font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace; }
+    @keyframes borderShimmer {
+      0%,100% { stroke: #58a6ff; stroke-opacity: 0.15; }
+      50% { stroke: #d2a8ff; stroke-opacity: 0.35; }
+    }
+  </style>""")
+
+    # ── Background ──
+    svg.append(f'  <rect width="100%" height="100%" rx="10" fill="{BACKGROUND}"/>')
+    svg.append(f'  <rect width="100%" height="100%" rx="10" fill="none" stroke="#58a6ff" stroke-width="1" stroke-opacity="0.15" style="animation: borderShimmer 4s ease-in-out infinite;"/>')
+
+    # ── ASCII Art with scan-reveal mask and gradient colouring ──
+    svg.append(f'  <g clip-path="url(#roundedClip)" mask="url(#scanReveal)">')
+    svg.append(f'    <g class="mono" font-size="{FONT_SIZE}" fill="url(#portraitGrad)" filter="url(#portraitGlow)">')
 
     for i, row in enumerate(rows):
-        y = 15 + i * LINE_HEIGHT
-        svg.append(f'    <text x="10" y="{y}" xml:space="preserve">{row}</text>')
+        ry = 15 + i * LINE_HEIGHT
+        # Escape each character for XML safety
+        safe_row = "".join(_esc(ch) for ch in row)
+        svg.append(f'      <text x="12" y="{ry}" xml:space="preserve">{safe_row}</text>')
 
-    svg.append("  </g>")
-    svg.append("</svg>")
+    svg.append('    </g>')
+    svg.append('  </g>')
+    svg.append('</svg>')
 
     content = "\n".join(svg)
     out_file = Path(output_path)
     with open(out_file, "w", encoding="utf-8") as f:
         f.write(content)
-
     print(f"Generated portrait SVG -> {out_file.resolve()}")
     return content

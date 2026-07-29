@@ -1,142 +1,119 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="840" height="760" viewBox="0 0 840 760">
-
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="820" viewBox="0 0 860 820">
+  <defs>
+    <!-- Glow filter for neon text -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Strong glow for banner -->
+    <filter id="glowStrong" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Subtle inner shadow for panel depth -->
+    <filter id="innerShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feOffset dx="0" dy="1"/>
+      <feGaussianBlur stdDeviation="1.5" result="shadow"/>
+      <feComposite in2="SourceGraphic" operator="arithmetic" k1="0" k2="1" k3="-0.2" k4="0"/>
+    </filter>
+    <!-- Gradient for the top bar -->
+    <linearGradient id="barGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#161b22"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+    <!-- Accent gradient for section headers -->
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d2a8ff"/>
+      <stop offset="50%" stop-color="#f778ba"/>
+      <stop offset="100%" stop-color="#ffa657"/>
+    </linearGradient>
+    <!-- Scanline overlay -->
+    <pattern id="scanlines" patternUnits="userSpaceOnUse" width="4" height="4">
+      <line x1="0" y1="0" x2="4" y2="0" stroke="#ffffff" stroke-opacity="0.015" stroke-width="1"/>
+    </pattern>
+  </defs>
   <style>
-    .font-mono { font-family: 'Fira Code', 'Courier New', Consolas, monospace; }
-    .cursor { animation: blink 1s infinite; fill: #58a6ff; }
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    .mono { font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace; }
+    .cursor { animation: blink 1s step-end infinite; }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+    @keyframes slideIn { from { transform: translateX(-12px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes fadeUp { from { transform: translateY(6px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes pulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+    @keyframes scanPulse { 0%,100% { opacity: 0.02; } 50% { opacity: 0.05; } }
+    @keyframes borderGlow {
+      0%,100% { stroke: #30363d; stroke-opacity: 0.5; }
+      50% { stroke: #58a6ff; stroke-opacity: 0.25; }
+    }
   </style>
-
-  <rect width="100%" height="100%" rx="12" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
-  <circle cx="25" cy="22" r="6" fill="#ff5f56"/>
-  <circle cx="45" cy="22" r="6" fill="#ffbd2e"/>
-  <circle cx="65" cy="22" r="6" fill="#27c93f"/>
-  <text x="90" y="27" class="font-mono" font-size="14" fill="#8b949e">Sarthak-Pandey@ai-terminal:~$ living-terminal --init</text>
-  <line x1="0" y1="42" x2="840" y2="42" stroke="#30363d" stroke-width="1"/>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.1s" fill="freeze"/>
-    <text x="25" y="65" class="font-mono" font-size="13" fill="#8b949e">  >> Initializing terminal...</text>
+  <rect width="100%" height="100%" rx="14" fill="#0d1117"/>
+  <rect width="100%" height="100%" rx="14" fill="none" stroke="#58a6ff" stroke-width="1" stroke-opacity="0.12" style="animation: borderGlow 6s ease-in-out infinite;"/>
+  <rect width="100%" height="100%" rx="14" fill="url(#scanlines)" style="animation: scanPulse 4s ease-in-out infinite;"/>
+  <rect x="0" y="0" width="860" height="44" rx="14" fill="url(#barGrad)"/>
+  <rect x="0" y="30" width="860" height="14" fill="url(#barGrad)"/>
+  <circle cx="24" cy="22" r="6.5" fill="#ff5f57" opacity="0.9"/>
+  <circle cx="24" cy="22" r="6.5" fill="none" stroke="#000" stroke-opacity="0.15" stroke-width="0.5"/>
+  <circle cx="46" cy="22" r="6.5" fill="#febc2e" opacity="0.9"/>
+  <circle cx="46" cy="22" r="6.5" fill="none" stroke="#000" stroke-opacity="0.15" stroke-width="0.5"/>
+  <circle cx="68" cy="22" r="6.5" fill="#28c840" opacity="0.9"/>
+  <circle cx="68" cy="22" r="6.5" fill="none" stroke="#000" stroke-opacity="0.15" stroke-width="0.5"/>
+  <text x="95" y="27" class="mono" font-size="13" fill="#8b949e" letter-spacing="0.5">Sarthak-Pandey@ai-terminal:~$ <tspan fill="#7ee787">living-terminal</tspan> <tspan fill="#8b949e">--init</tspan></text>
+  <line x1="0" y1="44" x2="860" y2="44" stroke="#30363d" stroke-width="1"/>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.25s" begin="0.20s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-10 0" to="0 0" dur="0.25s" begin="0.20s" fill="freeze"/><text x="28" y="68" class="mono" font-size="12" fill="#484f58"><tspan fill="#8b949e">›</tspan> Initializing terminal...</text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.25s" begin="0.32s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-10 0" to="0 0" dur="0.25s" begin="0.32s" fill="freeze"/><text x="28" y="87" class="mono" font-size="12" fill="#484f58"><tspan fill="#8b949e">›</tspan> Loading AI modules...</text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.25s" begin="0.44s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-10 0" to="0 0" dur="0.25s" begin="0.44s" fill="freeze"/><text x="28" y="106" class="mono" font-size="12" fill="#484f58"><tspan fill="#8b949e">›</tspan> Loading backend services...</text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.25s" begin="0.56s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-10 0" to="0 0" dur="0.25s" begin="0.56s" fill="freeze"/><text x="28" y="125" class="mono" font-size="12" fill="#484f58"><tspan fill="#8b949e">›</tspan> Connecting GitHub...</text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.25s" begin="0.68s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-10 0" to="0 0" dur="0.25s" begin="0.68s" fill="freeze"/><text x="28" y="144" class="mono" font-size="12" fill="#484f58"><tspan fill="#8b949e">›</tspan> Loading repositories...</text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.25s" begin="0.80s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-10 0" to="0 0" dur="0.25s" begin="0.80s" fill="freeze"/><text x="28" y="163" class="mono" font-size="12" fill="#484f58"><tspan fill="#8b949e">›</tspan> Rendering SVG...</text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.25s" begin="0.92s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-10 0" to="0 0" dur="0.25s" begin="0.92s" fill="freeze"/><text x="28" y="182" class="mono" font-size="12" fill="#484f58"><tspan fill="#8b949e">›</tspan> Fetching contribution graph...</text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.25s" begin="1.04s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-10 0" to="0 0" dur="0.25s" begin="1.04s" fill="freeze"/><text x="28" y="201" class="mono" font-size="12" fill="#484f58"><tspan fill="#8b949e">›</tspan> Loading learning progress...</text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.25s" begin="1.16s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-10 0" to="0 0" dur="0.25s" begin="1.16s" fill="freeze"/><text x="28" y="220" class="mono" font-size="12" fill="#7ee787"><tspan fill="#7ee787">✓</tspan> System ready.</text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="1.53s" fill="freeze"/>
+    <rect x="25" y="247" width="810" height="130" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="0.6" stroke-opacity="0.3"/>
+    <rect x="25" y="247" width="810" height="2" rx="1" fill="url(#accentGrad)" opacity="0.7"/>
+    <text x="430" y="279" class="mono" font-size="18" fill="#d2a8ff" text-anchor="middle" filter="url(#glow)">Welcome to Sarthak's Living Terminal</text>
+    <text x="430" y="309" class="mono" font-size="14" fill="#58a6ff" text-anchor="middle">AI Engineer | Backend Developer</text>
+    <text x="430" y="333" class="mono" font-size="13" fill="#8b949e" text-anchor="middle">Building AI Systems, Agents &amp; Products</text>
+    <rect x="180" y="347" width="130" height="18" rx="9" fill="#58a6ff" fill-opacity="0.1" stroke="#58a6ff" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="245" y="360" class="mono" font-size="9" fill="#58a6ff" text-anchor="middle">AI Engineer</text>
+    <rect x="320" y="347" width="130" height="18" rx="9" fill="#7ee787" fill-opacity="0.1" stroke="#7ee787" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="385" y="360" class="mono" font-size="9" fill="#7ee787" text-anchor="middle">Backend Developer</text>
+    <rect x="460" y="347" width="130" height="18" rx="9" fill="#d2a8ff" fill-opacity="0.1" stroke="#d2a8ff" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="525" y="360" class="mono" font-size="9" fill="#d2a8ff" text-anchor="middle">Full Stack Developer</text>
+    <rect x="600" y="347" width="130" height="18" rx="9" fill="#f778ba" fill-opacity="0.1" stroke="#f778ba" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="665" y="360" class="mono" font-size="9" fill="#f778ba" text-anchor="middle">Open Source Learner</text>
+    <rect x="740" y="347" width="130" height="18" rx="9" fill="#ffa657" fill-opacity="0.1" stroke="#ffa657" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="805" y="360" class="mono" font-size="9" fill="#ffa657" text-anchor="middle">Quant Research Enthusiast</text>
+    <rect x="880" y="347" width="130" height="18" rx="9" fill="#ff7b72" fill-opacity="0.1" stroke="#ff7b72" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="945" y="360" class="mono" font-size="9" fill="#ff7b72" text-anchor="middle">Lifelong Learner</text>
   </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.25s" fill="freeze"/>
-    <text x="25" y="87" class="font-mono" font-size="13" fill="#8b949e">  >> Loading AI modules...</text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.4s" fill="freeze"/>
-    <text x="25" y="109" class="font-mono" font-size="13" fill="#8b949e">  >> Loading backend services...</text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.55s" fill="freeze"/>
-    <text x="25" y="131" class="font-mono" font-size="13" fill="#8b949e">  >> Connecting GitHub...</text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.7s" fill="freeze"/>
-    <text x="25" y="153" class="font-mono" font-size="13" fill="#8b949e">  >> Loading repositories...</text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="0.85s" fill="freeze"/>
-    <text x="25" y="175" class="font-mono" font-size="13" fill="#8b949e">  >> Rendering SVG...</text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="1.0s" fill="freeze"/>
-    <text x="25" y="197" class="font-mono" font-size="13" fill="#8b949e">  >> Fetching contribution graph...</text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="1.15s" fill="freeze"/>
-    <text x="25" y="219" class="font-mono" font-size="13" fill="#8b949e">  >> Loading learning progress...</text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="1.3s" fill="freeze"/>
-    <text x="25" y="241" class="font-mono" font-size="13" fill="#7ee787">[OK] System ready.</text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="1.65s" fill="freeze"/>
-    <text x="25" y="273" class="font-mono" font-size="13" fill="#8b949e">╭────────────────────────────────────────────╮</text>
-    <text x="25" y="291" class="font-mono" font-size="13" fill="#8b949e">│                                            │</text>
-    <text x="25" y="309" class="font-mono" font-size="13" fill="#d2a8ff">│   Welcome to Sarthak's Living Terminal     │</text>
-    <text x="25" y="327" class="font-mono" font-size="13" fill="#8b949e">│                                            │</text>
-    <text x="25" y="345" class="font-mono" font-size="13" fill="#d2a8ff">│   AI Engineer | Backend Developer          │</text>
-    <text x="25" y="363" class="font-mono" font-size="13" fill="#8b949e">│   Building AI Systems, Agents & Products   │</text>
-    <text x="25" y="381" class="font-mono" font-size="13" fill="#8b949e">│                                            │</text>
-    <text x="25" y="399" class="font-mono" font-size="13" fill="#8b949e">╰────────────────────────────────────────────╯</text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="2.05s" fill="freeze"/>
-    <text x="25" y="432" class="font-mono" font-size="14" fill="#7ee787">
-      sarthak@ai-terminal:~$ <tspan fill="#c9d1d9">whoami</tspan>
-    </text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="2.35s" fill="freeze"/>
-    <text x="45" y="454" class="font-mono" font-size="13" fill="#58a6ff">► Name   : Sarthak Pandey</text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="2.5s" fill="freeze"/>
-    <text x="45" y="474" class="font-mono" font-size="13" fill="#58a6ff">► Title  : AI Engineer</text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="2.65s" fill="freeze"/>
-    <text x="45" y="494" class="font-mono" font-size="13" fill="#58a6ff">► Roles  : AI Engineer • Backend Developer • Full Stack Developer • Open Source Learner</text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="2.05s" fill="freeze"/>
-    <rect x="235" y="452" width="9" height="15" class="cursor"/>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="3.1s" fill="freeze"/>
-    <line x1="25" y1="529" x2="815" y2="529" stroke="#30363d" stroke-width="1" stroke-dasharray="4 4"/>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="3.1s" fill="freeze"/>
-    <text x="25" y="554" class="font-mono" font-size="14" font-weight="bold" fill="#d2a8ff">⚡ CURRENT FOCUS & STACK</text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="3.3s" fill="freeze"/>
-    <text x="25" y="579" class="font-mono" font-size="13" fill="#7ee787">Role       </text>
-    <text x="140" y="579" class="font-mono" font-size="13" fill="#c9d1d9">: <tspan fill="#58a6ff">AI Engineer</tspan></text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="3.45s" fill="freeze"/>
-    <text x="25" y="603" class="font-mono" font-size="13" fill="#7ee787">Focus      </text>
-    <text x="140" y="603" class="font-mono" font-size="13" fill="#c9d1d9">: <tspan fill="#58a6ff">LLMs • AI Agents • RAG • Backend</tspan></text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="3.6s" fill="freeze"/>
-    <text x="25" y="627" class="font-mono" font-size="13" fill="#7ee787">Backend    </text>
-    <text x="140" y="627" class="font-mono" font-size="13" fill="#c9d1d9">: <tspan fill="#58a6ff">Node.js • Express • FastAPI</tspan></text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="3.75s" fill="freeze"/>
-    <text x="25" y="651" class="font-mono" font-size="13" fill="#7ee787">Frontend   </text>
-    <text x="140" y="651" class="font-mono" font-size="13" fill="#c9d1d9">: <tspan fill="#58a6ff">React • Vite</tspan></text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="3.9s" fill="freeze"/>
-    <text x="25" y="675" class="font-mono" font-size="13" fill="#7ee787">Languages  </text>
-    <text x="140" y="675" class="font-mono" font-size="13" fill="#c9d1d9">: <tspan fill="#58a6ff">Python • JavaScript • C++</tspan></text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="4.05s" fill="freeze"/>
-    <text x="25" y="699" class="font-mono" font-size="13" fill="#7ee787">Database   </text>
-    <text x="140" y="699" class="font-mono" font-size="13" fill="#c9d1d9">: <tspan fill="#58a6ff">MongoDB • PostgreSQL • Redis</tspan></text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="4.2s" fill="freeze"/>
-    <text x="25" y="723" class="font-mono" font-size="13" fill="#7ee787">Cloud      </text>
-    <text x="140" y="723" class="font-mono" font-size="13" fill="#c9d1d9">: <tspan fill="#58a6ff">AWS</tspan></text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="4.35s" fill="freeze"/>
-    <text x="25" y="747" class="font-mono" font-size="13" fill="#7ee787">DevOps     </text>
-    <text x="140" y="747" class="font-mono" font-size="13" fill="#c9d1d9">: <tspan fill="#58a6ff">Docker • GitHub Actions</tspan></text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="4.5s" fill="freeze"/>
-    <text x="25" y="771" class="font-mono" font-size="13" fill="#7ee787">Learning   </text>
-    <text x="140" y="771" class="font-mono" font-size="13" fill="#c9d1d9">: <tspan fill="#58a6ff">LangGraph • MCP • RAG</tspan></text>
-  </g>
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="4.65s" fill="freeze"/>
-    <text x="25" y="795" class="font-mono" font-size="13" fill="#7ee787">Research   </text>
-    <text x="140" y="795" class="font-mono" font-size="13" fill="#c9d1d9">: <tspan fill="#58a6ff">WorldQuant Brain</tspan></text>
-  </g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="2.03s" fill="freeze"/><text x="28" y="395" class="mono" font-size="14"><tspan fill="#7ee787">sarthak@ai-terminal:~$</tspan> <tspan fill="#e6edf3">whoami</tspan></text><rect x="255" y="383" width="9" height="15" rx="1" fill="#58a6ff" class="cursor"/></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="2.33s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="0 4" to="0 0" dur="0.2s" begin="2.33s" fill="freeze"/><text x="45" y="419" class="mono" font-size="13"><tspan fill="#7ee787">▸</tspan> <tspan fill="#8b949e">Name    </tspan> <tspan fill="#484f58">→</tspan> <tspan fill="#58a6ff">Sarthak Pandey</tspan></text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="2.45s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="0 4" to="0 0" dur="0.2s" begin="2.45s" fill="freeze"/><text x="45" y="440" class="mono" font-size="13"><tspan fill="#7ee787">▸</tspan> <tspan fill="#8b949e">Title   </tspan> <tspan fill="#484f58">→</tspan> <tspan fill="#d2a8ff">AI Engineer</tspan></text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="2.57s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="0 4" to="0 0" dur="0.2s" begin="2.57s" fill="freeze"/><text x="45" y="461" class="mono" font-size="13"><tspan fill="#7ee787">▸</tspan> <tspan fill="#8b949e">Location</tspan> <tspan fill="#484f58">→</tspan> <tspan fill="#7ee787">India</tspan></text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="2.69s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="0 4" to="0 0" dur="0.2s" begin="2.69s" fill="freeze"/><text x="45" y="482" class="mono" font-size="13"><tspan fill="#7ee787">▸</tspan> <tspan fill="#8b949e">Education</tspan> <tspan fill="#484f58">→</tspan> <tspan fill="#ffa657">B.Tech Computer Science &amp; Engineering</tspan></text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="2.81s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="0 4" to="0 0" dur="0.2s" begin="2.81s" fill="freeze"/><text x="45" y="503" class="mono" font-size="13"><tspan fill="#7ee787">▸</tspan> <tspan fill="#8b949e">College </tspan> <tspan fill="#484f58">→</tspan> <tspan fill="#8b949e">KIET Group of Institutions</tspan></text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="3.08s" fill="freeze"/><rect x="25" y="534" width="810" height="1" fill="url(#accentGrad)" opacity="0.4"/></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="3.08s" fill="freeze"/><text x="28" y="556" class="mono" font-size="14" font-weight="bold" fill="url(#accentGrad)" filter="url(#glow)">⚡ CURRENT FOCUS &amp; STACK</text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="3.33s" fill="freeze"/><rect x="25" y="564" width="810" height="21" rx="3" fill="#161b22" opacity="0.5"/></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="3.33s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-15 0" to="0 0" dur="0.35s" begin="3.33s" fill="freeze"/><text x="30" y="578" class="mono" font-size="13"><tspan fill="#58a6ff" font-weight="bold">Role       </tspan><tspan fill="#484f58"> : </tspan><tspan fill="#e6edf3">AI Engineer</tspan></text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="3.43s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-15 0" to="0 0" dur="0.35s" begin="3.43s" fill="freeze"/><text x="30" y="601" class="mono" font-size="13"><tspan fill="#7ee787" font-weight="bold">Focus      </tspan><tspan fill="#484f58"> : </tspan><tspan fill="#e6edf3">LLMs • AI Agents • RAG • Backend</tspan></text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="3.53s" fill="freeze"/><rect x="25" y="610" width="810" height="21" rx="3" fill="#161b22" opacity="0.5"/></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="3.53s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-15 0" to="0 0" dur="0.35s" begin="3.53s" fill="freeze"/><text x="30" y="624" class="mono" font-size="13"><tspan fill="#d2a8ff" font-weight="bold">Backend    </tspan><tspan fill="#484f58"> : </tspan><tspan fill="#e6edf3">Node.js • Express • FastAPI</tspan></text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="3.63s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-15 0" to="0 0" dur="0.35s" begin="3.63s" fill="freeze"/><text x="30" y="647" class="mono" font-size="13"><tspan fill="#f778ba" font-weight="bold">Frontend   </tspan><tspan fill="#484f58"> : </tspan><tspan fill="#e6edf3">React • Vite</tspan></text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="3.73s" fill="freeze"/><rect x="25" y="656" width="810" height="21" rx="3" fill="#161b22" opacity="0.5"/></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="3.73s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-15 0" to="0 0" dur="0.35s" begin="3.73s" fill="freeze"/><text x="30" y="670" class="mono" font-size="13"><tspan fill="#ffa657" font-weight="bold">Languages  </tspan><tspan fill="#484f58"> : </tspan><tspan fill="#e6edf3">Python • JavaScript • C++</tspan></text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="3.83s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-15 0" to="0 0" dur="0.35s" begin="3.83s" fill="freeze"/><text x="30" y="693" class="mono" font-size="13"><tspan fill="#58a6ff" font-weight="bold">Database   </tspan><tspan fill="#484f58"> : </tspan><tspan fill="#e6edf3">MongoDB • PostgreSQL • Redis</tspan></text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="3.93s" fill="freeze"/><rect x="25" y="702" width="810" height="21" rx="3" fill="#161b22" opacity="0.5"/></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="3.93s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-15 0" to="0 0" dur="0.35s" begin="3.93s" fill="freeze"/><text x="30" y="716" class="mono" font-size="13"><tspan fill="#7ee787" font-weight="bold">Cloud      </tspan><tspan fill="#484f58"> : </tspan><tspan fill="#e6edf3">AWS</tspan></text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="4.03s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-15 0" to="0 0" dur="0.35s" begin="4.03s" fill="freeze"/><text x="30" y="739" class="mono" font-size="13"><tspan fill="#d2a8ff" font-weight="bold">DevOps     </tspan><tspan fill="#484f58"> : </tspan><tspan fill="#e6edf3">Docker • GitHub Actions</tspan></text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="4.13s" fill="freeze"/><rect x="25" y="748" width="810" height="21" rx="3" fill="#161b22" opacity="0.5"/></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="4.13s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-15 0" to="0 0" dur="0.35s" begin="4.13s" fill="freeze"/><text x="30" y="762" class="mono" font-size="13"><tspan fill="#ffa657" font-weight="bold">Learning   </tspan><tspan fill="#484f58"> : </tspan><tspan fill="#e6edf3">LangGraph • MCP • RAG</tspan></text></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="4.23s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-15 0" to="0 0" dur="0.35s" begin="4.23s" fill="freeze"/><text x="30" y="785" class="mono" font-size="13"><tspan fill="#f778ba" font-weight="bold">Research   </tspan><tspan fill="#484f58"> : </tspan><tspan fill="#e6edf3">WorldQuant Brain</tspan></text></g>
 </svg>

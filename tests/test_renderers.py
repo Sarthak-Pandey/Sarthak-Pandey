@@ -23,19 +23,22 @@ def test_renderers(tmp_path: Path):
 
     panel_content = render_panel_svg(config, panel_path)
     assert "<svg" in panel_content
-    assert "Sarthak Pandey" in panel_content or "sarthak" in panel_content
+    assert "sarthak" in panel_content.lower() or "Sarthak" in panel_content
     assert "AI Engineer" in panel_content
 
-    graph_content = render_graph_svg([{"date": "2026-01-01", "count": 2, "level": 1}], stats, graph_path)
+    graph_content = render_graph_svg(
+        [{"date": "2026-01-01", "count": 2, "level": 1}],
+        stats, graph_path
+    )
     assert "<svg" in graph_content
-    assert "GitHub Contributions" in graph_content
+    assert "contributions.log" in graph_content
 
     portrait_content = render_portrait_svg(portrait_path)
     assert "<svg" in portrait_content
 
     readme_content = render_readme_markdown(config, learning, stats, readme_path)
-    assert "Welcome to Sarthak's Living Terminal" in readme_content
+    assert "Living Terminal" in readme_content
     assert "Currently Learning" in readme_content
     assert "Current Projects" in readme_content
     assert "Research" in readme_content
-    assert "Last Updated" in readme_content
+    assert "Last updated" in readme_content
