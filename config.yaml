@@ -1,0 +1,100 @@
+developer:
+  name: Sarthak Pandey
+  title: AI Engineer
+  location: India
+  education:
+    degree: B.Tech Computer Science & Engineering
+    college: KIET Group of Institutions
+  github_username: Sarthak-Pandey
+
+branding:
+  banner_title: "Welcome to Sarthak's Living Terminal"
+  subtitle: "AI Engineer | Backend Developer"
+  tagline: "Building AI Systems, Agents & Products"
+  roles:
+    - AI Engineer
+    - Backend Developer
+    - Full Stack Developer
+    - Open Source Learner
+    - Quant Research Enthusiast
+    - Lifelong Learner
+
+focus_rows:
+  - ["Role", "AI Engineer"]
+  - ["Focus", "LLMs • AI Agents • RAG • Backend"]
+  - ["Backend", "Node.js • Express • FastAPI"]
+  - ["Frontend", "React • Vite"]
+  - ["Languages", "Python • JavaScript • C++"]
+  - ["Database", "MongoDB • PostgreSQL • Redis"]
+  - ["Cloud", "AWS"]
+  - ["DevOps", "Docker • GitHub Actions"]
+  - ["Learning", "LangGraph • MCP • RAG"]
+  - ["Research", "WorldQuant Brain"]
+
+skills:
+  languages:
+    - Python
+    - JavaScript
+    - C++
+    - SQL
+  frontend:
+    - React
+    - Vite
+    - HTML
+    - CSS
+  backend:
+    - Node.js
+    - Express
+    - FastAPI
+    - REST APIs
+  databases:
+    - MongoDB
+    - PostgreSQL
+    - Redis
+  ai_engineering:
+    - LangChain
+    - LangGraph
+    - MCP
+    - RAG
+    - Vector Databases
+    - Hugging Face
+    - Transformers
+    - AI Agents
+  machine_learning:
+    - NumPy
+    - Pandas
+    - Scikit-learn
+    - PyTorch
+  devops_cloud:
+    - Git
+    - GitHub
+    - Docker
+    - GitHub Actions
+    - AWS
+
+projects:
+  - Living Terminal
+  - AI Core Search (Perplexity-style AI Search Engine)
+  - Prompt Optimizer
+  - Moodify
+
+research_interests:
+  - Large Language Models
+  - AI Agents
+  - Retrieval-Augmented Generation
+  - Prompt Engineering
+  - Prompt Optimization
+  - WorldQuant Alpha Research
+  - Backend Architecture
+  - System Design
+
+boot_sequence:
+  - Initializing terminal...
+  - Loading AI modules...
+  - Loading backend services...
+  - Connecting GitHub...
+  - Loading repositories...
+  - Rendering SVG...
+  - Fetching contribution graph...
+  - Loading learning progress...
+  - System ready.
