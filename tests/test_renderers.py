@@ -56,7 +56,6 @@ def test_renderers(tmp_path: Path):
     # 3. Readme markdown rendering
     readme_path = tmp_path / "Readme.md"
     readme_content = render_readme_markdown(config, learning, stats, readme_path)
-    assert "Living Terminal • v2.0" in readme_content
     # Check that it uses prefers-color-scheme picture source tags
     assert "prefers-color-scheme: dark" in readme_content
     assert "sysinfo-dark.svg" in readme_content

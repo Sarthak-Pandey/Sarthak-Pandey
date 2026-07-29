@@ -104,20 +104,6 @@
 
 ---
 
-## 📚 Currently Learning
-
-- [x] LangGraph
-- [x] MCP
-- [x] RAG
-- [x] AI Agents
-- [x] Prompt Optimization
-- [x] Backend Engineering
-- [x] System Design
-- [x] AWS
-- [x] MLOps
-
----
-
 ## 🔬 Research Interests
 
 ▸ **Large Language Models**
@@ -136,11 +122,3 @@
     ◆ Advanced algorithmic architectures and engineering models.
 
 ---
-
-<div align="center">
-
-────────────────────────────────────────────────────────────────────────
-Living Terminal • v2.0 • © 2026 Sarthak Pandey
-<sub>🕐 Last updated: 2026-07-29 10:32 UTC · Generated dynamically</sub>
-
-</div>

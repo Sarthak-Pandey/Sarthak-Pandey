@@ -184,19 +184,7 @@ def render_readme_markdown(
     L.append("---")
     L.append("")
 
-    # ── 6. Currently Learning ──
-    L.append("## 📚 Currently Learning")
-    L.append("")
-    for topic in learning_topics:
-        display = topic
-        if "(" in topic and ")" in topic:
-            m = re.search(r"\(([^)]+)\)", topic)
-            if m:
-                display = m.group(1)
-        L.append(f"- [x] {display}")
-    L.append("")
-    L.append("---")
-    L.append("")
+
 
     # ── 7. Research Interests ──
     L.append("## 🔬 Research Interests")
@@ -207,16 +195,6 @@ def render_readme_markdown(
         L.append("    ◆ Advanced algorithmic architectures and engineering models.")
     L.append("")
     L.append("---")
-    L.append("")
-
-    # ── 9. Footer ──
-    L.append('<div align="center">')
-    L.append("")
-    L.append("────────────────────────────────────────────────────────────────────────")
-    L.append(f"Living Terminal • v2.0 • © 2026 Sarthak Pandey")
-    L.append(f"<sub>🕐 Last updated: {utc_now} · Generated dynamically</sub>")
-    L.append("")
-    L.append("</div>")
     L.append("")
 
     content = "\n".join(L)
