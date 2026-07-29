@@ -1,5 +1,6 @@
 from pathlib import Path
 from typing import List
+from ..theme import ThemePalette, DARK_THEME
 
 try:
     from PIL import Image
@@ -17,7 +18,6 @@ FALLBACK_IMAGE = Path("assets/me.jpg")
 WIDTH = 80
 FONT_SIZE = 10
 LINE_HEIGHT = 12
-BACKGROUND = "#0d1117"
 
 
 def image_to_ascii(image: "Image.Image") -> List[str]:
@@ -77,7 +77,10 @@ def _esc(ch: str) -> str:
     return ch
 
 
-def render_portrait_svg(output_path: Path | str = "portrait.svg") -> str:
+def render_portrait_svg(
+    theme: ThemePalette = DARK_THEME,
+    output_path: Path | str = "portrait.svg"
+) -> str:
     image = None
     if HAS_PIL and Image is not None:
         if INPUT_IMAGE.exists():
@@ -104,11 +107,11 @@ def render_portrait_svg(output_path: Path | str = "portrait.svg") -> str:
     )
 
     # ── Definitions ──
-    svg.append("""  <defs>
+    svg.append(f"""  <defs>
     <linearGradient id="portraitGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#58a6ff" stop-opacity="0.8"/>
-      <stop offset="40%" stop-color="#58a6ff" stop-opacity="0.5"/>
-      <stop offset="100%" stop-color="#d2a8ff" stop-opacity="0.3"/>
+      <stop offset="0%" stop-color="{theme.accent_blue}" stop-opacity="0.8"/>
+      <stop offset="40%" stop-color="{theme.accent_blue}" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="{theme.accent_purple}" stop-opacity="0.3"/>
     </linearGradient>
     <filter id="portraitGlow" x="-5%" y="-5%" width="110%" height="110%">
       <feGaussianBlur stdDeviation="1" result="blur"/>
@@ -127,17 +130,17 @@ def render_portrait_svg(output_path: Path | str = "portrait.svg") -> str:
     </clipPath>
   </defs>""")
 
-    svg.append("""  <style>
-    .mono { font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace; }
-    @keyframes borderShimmer {
-      0%,100% { stroke: #58a6ff; stroke-opacity: 0.15; }
-      50% { stroke: #d2a8ff; stroke-opacity: 0.35; }
-    }
+    svg.append(f"""  <style>
+    .mono {{ font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace; }}
+    @keyframes borderShimmer {{
+      0%,100% {{ stroke: {theme.accent_blue}; stroke-opacity: 0.15; }}
+      50% {{ stroke: {theme.accent_purple}; stroke-opacity: 0.35; }}
+    }}
   </style>""")
 
     # ── Background ──
-    svg.append(f'  <rect width="100%" height="100%" rx="10" fill="{BACKGROUND}"/>')
-    svg.append(f'  <rect width="100%" height="100%" rx="10" fill="none" stroke="#58a6ff" stroke-width="1" stroke-opacity="0.15" style="animation: borderShimmer 4s ease-in-out infinite;"/>')
+    svg.append(f'  <rect width="100%" height="100%" rx="10" fill="{theme.bg}"/>')
+    svg.append(f'  <rect width="100%" height="100%" rx="10" fill="none" stroke="{theme.accent_blue}" stroke-width="1" stroke-opacity="0.15" style="animation: borderShimmer 4s ease-in-out infinite;"/>')
 
     # ── ASCII Art with scan-reveal mask and gradient colouring ──
     svg.append(f'  <g clip-path="url(#roundedClip)" mask="url(#scanReveal)">')
@@ -145,7 +148,6 @@ def render_portrait_svg(output_path: Path | str = "portrait.svg") -> str:
 
     for i, row in enumerate(rows):
         ry = 15 + i * LINE_HEIGHT
-        # Escape each character for XML safety
         safe_row = "".join(_esc(ch) for ch in row)
         svg.append(f'      <text x="12" y="{ry}" xml:space="preserve">{safe_row}</text>')
 

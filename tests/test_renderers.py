@@ -9,6 +9,7 @@ from living_terminal.renderers.panel import render_panel_svg
 from living_terminal.renderers.portrait import render_portrait_svg
 from living_terminal.renderers.readme import render_readme_markdown
 from living_terminal.stats import calculate_stats
+from living_terminal.theme import DARK_THEME, LIGHT_THEME
 
 
 def test_renderers(tmp_path: Path):
@@ -16,29 +17,46 @@ def test_renderers(tmp_path: Path):
     learning = load_learning("assets/learning.json")
     stats = calculate_stats([{"date": "2026-01-01", "count": 2, "level": 1}])
 
-    panel_path = tmp_path / "sysinfo.svg"
-    graph_path = tmp_path / "graph.svg"
-    portrait_path = tmp_path / "portrait.svg"
+    # 1. Dark theme rendering
+    panel_dark = tmp_path / "sysinfo-dark.svg"
+    graph_dark = tmp_path / "graph-dark.svg"
+    portrait_dark = tmp_path / "portrait-dark.svg"
+
+    panel_content_dark = render_panel_svg(config, DARK_THEME, panel_dark)
+    assert "<svg" in panel_content_dark
+    assert "Sarthak Pandey" in panel_content_dark
+    # Check for box-drawing characters used in table
+    assert "┌" in panel_content_dark or "├" in panel_content_dark
+
+    graph_content_dark = render_graph_svg([{"date": "2026-01-01", "count": 2, "level": 1}], stats, DARK_THEME, graph_dark)
+    assert "<svg" in graph_content_dark
+    # Check for hover transition CSS style
+    assert ".cell:hover" in graph_content_dark
+    # Check for Sparkline path style
+    assert "polyline" in graph_content_dark
+
+    portrait_content_dark = render_portrait_svg(DARK_THEME, portrait_dark)
+    assert "<svg" in portrait_content_dark
+
+    # 2. Light theme rendering
+    panel_light = tmp_path / "sysinfo-light.svg"
+    graph_light = tmp_path / "graph-light.svg"
+    portrait_light = tmp_path / "portrait-light.svg"
+
+    panel_content_light = render_panel_svg(config, LIGHT_THEME, panel_light)
+    assert "<svg" in panel_content_light
+    assert LIGHT_THEME.bg in panel_content_light
+
+    graph_content_light = render_graph_svg([{"date": "2026-01-01", "count": 2, "level": 1}], stats, LIGHT_THEME, graph_light)
+    assert "<svg" in graph_content_light
+
+    portrait_content_light = render_portrait_svg(LIGHT_THEME, portrait_light)
+    assert "<svg" in portrait_content_light
+
+    # 3. Readme markdown rendering
     readme_path = tmp_path / "Readme.md"
-
-    panel_content = render_panel_svg(config, panel_path)
-    assert "<svg" in panel_content
-    assert "sarthak" in panel_content.lower() or "Sarthak" in panel_content
-    assert "AI Engineer" in panel_content
-
-    graph_content = render_graph_svg(
-        [{"date": "2026-01-01", "count": 2, "level": 1}],
-        stats, graph_path
-    )
-    assert "<svg" in graph_content
-    assert "contributions.log" in graph_content
-
-    portrait_content = render_portrait_svg(portrait_path)
-    assert "<svg" in portrait_content
-
     readme_content = render_readme_markdown(config, learning, stats, readme_path)
-    assert "Living Terminal" in readme_content
-    assert "Currently Learning" in readme_content
-    assert "Current Projects" in readme_content
-    assert "Research" in readme_content
-    assert "Last updated" in readme_content
+    assert "Living Terminal • v2.0" in readme_content
+    # Check that it uses prefers-color-scheme picture source tags
+    assert "prefers-color-scheme: dark" in readme_content
+    assert "sysinfo-dark.svg" in readme_content

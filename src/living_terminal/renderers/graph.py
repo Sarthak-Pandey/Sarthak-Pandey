@@ -1,44 +1,33 @@
 from pathlib import Path
 from typing import Any, Dict, List
 from ..stats import GitHubStats
-
-LEVELS = [
-    "#161b22",  # Level 0 – no contributions
-    "#0e4429",  # Level 1
-    "#006d32",  # Level 2
-    "#26a641",  # Level 3
-    "#39d353",  # Level 4
-]
-
-# Glow colours matching contribution level
-GLOW_COLORS = [
-    "none",
-    "#0e442944",
-    "#006d3244",
-    "#26a64166",
-    "#39d35388",
-]
-
-CELL = 13
-GAP = 3
-MARGIN_X = 55
-MARGIN_Y = 70
-MONTH_LABELS = [
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-]
-DAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+from ..theme import ThemePalette, DARK_THEME, svg_defs
 
 
 def render_graph_svg(
     days: List[Dict[str, Any]],
     stats: GitHubStats,
+    theme: ThemePalette = DARK_THEME,
     output_path: Path | str = "graph.svg"
 ) -> str:
+    # Colors for contribution levels based on the theme
+    levels = [
+        theme.bg_panel,            # Level 0 (No contributions)
+        theme.accent_teal + "33",  # Level 1
+        theme.accent_teal + "66",  # Level 2
+        theme.accent_teal + "b3",  # Level 3
+        theme.accent_teal,         # Level 4
+    ]
+
+    cell_size = 13
+    gap = 3
+    margin_x = 55
+    margin_y = 70
     weeks_count = 53
-    grid_w = weeks_count * (CELL + GAP)
-    width = MARGIN_X + grid_w + 40
-    height = MARGIN_Y + 7 * (CELL + GAP) + 90
+    grid_w = weeks_count * (cell_size + gap)
+    width = margin_x + grid_w + 40
+    # Make height slightly taller to fit the new 30-day sparkline
+    height = margin_y + 7 * (cell_size + gap) + 145
 
     svg: list[str] = []
     svg.append(
@@ -47,52 +36,49 @@ def render_graph_svg(
         f'viewBox="0 0 {width} {height}">'
     )
 
-    # ── Definitions ──
-    svg.append("""  <defs>
-    <filter id="cellGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="2.5" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#58a6ff"/>
-      <stop offset="100%" stop-color="#d2a8ff"/>
-    </linearGradient>
-    <linearGradient id="statBadgeGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#7ee787"/>
-      <stop offset="100%" stop-color="#39d353"/>
-    </linearGradient>
-    <!-- Scanline overlay -->
-    <pattern id="scanlines" patternUnits="userSpaceOnUse" width="4" height="4">
-      <line x1="0" y1="0" x2="4" y2="0" stroke="#ffffff" stroke-opacity="0.012" stroke-width="1"/>
-    </pattern>
-  </defs>""")
-
-    svg.append("""  <style>
-    .mono { font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace; }
-    @keyframes waveIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
-    @keyframes borderPulse {
-      0%,100% { stroke-opacity: 0.1; }
-      50% { stroke-opacity: 0.25; }
-    }
+    # ── Definitions & Styles ──
+    svg.append(svg_defs(theme))
+    svg.append(f"""  <style>
+    .mono {{ font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace; }}
+    @keyframes waveIn {{ from {{ opacity: 0; transform: scale(0.5); }} to {{ opacity: 1; transform: scale(1); }} }}
+    @keyframes borderPulse {{
+      0%,100% {{ stroke-opacity: 0.1; }}
+      50% {{ stroke-opacity: 0.25; }}
+    }}
+    .cell {{
+      transform-box: fill-box;
+      transform-origin: center;
+      transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), fill 0.15s ease;
+      cursor: pointer;
+    }}
+    .cell:hover {{
+      transform: scale(1.4);
+      fill: {theme.accent_cyan} !important;
+    }}
+    .sparkline-path {{
+      stroke-dasharray: 400;
+      stroke-dashoffset: 400;
+      animation: drawSpark 2s ease-out 1s forwards;
+    }}
+    @keyframes drawSpark {{
+      to {{ stroke-dashoffset: 0; }}
+    }}
   </style>""")
 
     # ── Background ──
-    svg.append(f'  <rect width="100%" height="100%" rx="12" fill="#0d1117"/>')
-    svg.append(f'  <rect width="100%" height="100%" rx="12" fill="none" stroke="#58a6ff" stroke-width="1" stroke-opacity="0.1" style="animation: borderPulse 5s ease-in-out infinite;"/>')
-    svg.append(f'  <rect width="100%" height="100%" rx="12" fill="url(#scanlines)"/>')
+    svg.append(f'  <rect width="100%" height="100%" rx="12" fill="{theme.bg}"/>')
+    svg.append(f'  <rect width="100%" height="100%" rx="12" fill="none" stroke="{theme.accent_blue}" stroke-width="1" stroke-opacity="0.1" style="animation: borderPulse 5s ease-in-out infinite;"/>')
+    svg.append(f'  <rect width="100%" height="100%" rx="12" fill="url(#scanlines)" opacity="0.4"/>')
 
-    # ── Header Bar ──
-    svg.append(f'  <text x="{MARGIN_X}" y="30" class="mono" font-size="15" font-weight="bold" fill="url(#headerGrad)">$ cat contributions.log</text>')
+    # ── Header ──
+    svg.append(f'  <text x="{margin_x}" y="30" class="mono" font-size="15" font-weight="bold" fill="url(#accentGrad)">$ cat contributions.log</text>')
 
-    # Stats badges (pill-shaped)
+    # Stats badges
     badges = [
-        (f"Total: {stats.total_contributions}", "#7ee787"),
-        (f"Streak: {stats.current_streak}d", "#58a6ff"),
-        (f"Max: {stats.longest_streak}d", "#d2a8ff"),
-        (f"Heat: {stats.heat_score_display}", "#ffa657"),
+        (f"Total: {stats.total_contributions}", theme.accent_green),
+        (f"Streak: {stats.current_streak}d", theme.accent_blue),
+        (f"Max: {stats.longest_streak}d", theme.accent_purple),
+        (f"Heat: {stats.heat_score_display}", theme.accent_orange),
     ]
     bx = width - 35
     for badge_text, badge_color in reversed(badges):
@@ -108,15 +94,17 @@ def render_graph_svg(
             f'fill="{badge_color}" text-anchor="middle">{badge_text}</text>'
         )
 
-    svg.append(f'  <rect x="20" y="45" width="{width - 40}" height="1" fill="#30363d" opacity="0.6"/>')
+    svg.append(f'  <rect x="20" y="45" width="{width - 40}" height="1" fill="{theme.border}" opacity="0.6"/>')
 
-    # ── Day labels (left side) ──
-    for i, label in enumerate(DAY_LABELS):
-        if i % 2 == 1:  # show Mon, Wed, Fri
-            dy = MARGIN_Y + i * (CELL + GAP) + CELL // 2 + 4
-            svg.append(f'  <text x="{MARGIN_X - 8}" y="{dy}" class="mono" font-size="9" fill="#484f58" text-anchor="end">{label}</text>')
+    # ── Day Labels ──
+    day_labels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    for i, label in enumerate(day_labels):
+        if i % 2 == 1:
+            dy = margin_y + i * (cell_size + gap) + cell_size // 2 + 4
+            svg.append(f'  <text x="{margin_x - 8}" y="{dy}" class="mono" font-size="9" fill="{theme.text_muted}" text-anchor="end">{label}</text>')
 
-    # ── Month labels (top) ──
+    # ── Month Labels ──
+    month_labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     if days:
         last_month = -1
         for index in range(0, min(len(days), 53 * 7), 7):
@@ -126,39 +114,34 @@ def render_graph_svg(
                     month = int(date_str.split("-")[1])
                     if month != last_month:
                         week = index // 7
-                        mx = MARGIN_X + week * (CELL + GAP)
+                        mx = margin_x + week * (cell_size + gap)
                         svg.append(
-                            f'  <text x="{mx}" y="{MARGIN_Y - 8}" class="mono" font-size="9" fill="#484f58">'
-                            f'{MONTH_LABELS[month - 1]}</text>'
+                            f'  <text x="{mx}" y="{margin_y - 8}" class="mono" font-size="9" fill="{theme.text_muted}">'
+                            f'{month_labels[month - 1]}</text>'
                         )
                         last_month = month
                 except (IndexError, ValueError):
                     pass
 
-    # ── Heatmap Grid with wave animation ──
+    # ── Grid cells ──
     total_cells = min(len(days), 53 * 7)
     for index in range(total_cells):
         day = days[index]
         week = index // 7
         weekday = index % 7
 
-        x = MARGIN_X + week * (CELL + GAP)
-        cell_y = MARGIN_Y + weekday * (CELL + GAP)
+        x = margin_x + week * (cell_size + gap)
+        cell_y = margin_y + weekday * (cell_size + gap)
 
         level = min(max(int(day.get("level", 0)), 0), 4)
-        color = LEVELS[level]
+        color = levels[level]
         date = day.get("date", "")
         count = day.get("count", 0)
 
-        # Wave-in animation delay: column by column, top to bottom
         delay = round(0.3 + week * 0.03 + weekday * 0.005, 3)
-
-        attrs = (
-            f'x="{x}" y="{cell_y}" width="{CELL}" height="{CELL}" rx="2" fill="{color}"'
-        )
+        attrs = f'x="{x}" y="{cell_y}" width="{cell_size}" height="{cell_size}" rx="2" fill="{color}" class="cell"'
 
         if level >= 3:
-            # Active cells get a subtle glow
             svg.append(
                 f'  <g opacity="0" style="animation: waveIn 0.2s {delay}s both;">'
                 f'<rect {attrs} filter="url(#cellGlow)"/>'
@@ -170,21 +153,70 @@ def render_graph_svg(
                 f'<rect {attrs}/><title>{date}: {count} contributions</title></g>'
             )
 
+    # ── 30-Day Activity Sparkline ──
+    sparkline_top = margin_y + 7 * (cell_size + gap) + 30
+    sparkline_height = 45
+    spark_days = days[-30:] if len(days) >= 30 else days
+
+    if spark_days:
+        max_count = max(d.get("count", 0) for d in spark_days)
+        if max_count == 0:
+            max_count = 1
+
+        points = []
+        x_step = grid_w / max(1, len(spark_days) - 1)
+        for i, d in enumerate(spark_days):
+            cx = margin_x + i * x_step
+            cy = sparkline_top + sparkline_height - (d.get("count", 0) / max_count) * sparkline_height
+            points.append((cx, cy))
+
+        # Polyline points string
+        pts_str = " ".join(f"{px},{py}" for px, py in points)
+
+        # Glow Area Gradient
+        svg.append(f"""  <defs>
+    <linearGradient id="sparkAreaGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="{theme.accent_cyan}" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="{theme.accent_cyan}" stop-opacity="0.0"/>
+    </linearGradient>
+  </defs>""")
+
+        # Draw filled area under sparkline
+        area_pts = f"{margin_x},{sparkline_top + sparkline_height} {pts_str} {margin_x + (len(spark_days)-1)*x_step},{sparkline_top + sparkline_height}"
+        svg.append(f'  <polygon points="{area_pts}" fill="url(#sparkAreaGrad)"/>')
+
+        # Draw sparkline path
+        svg.append(
+            f'  <polyline points="{pts_str}" fill="none" stroke="{theme.accent_cyan}" stroke-width="2" '
+            f'stroke-linecap="round" stroke-linejoin="round" class="sparkline-path"/>'
+        )
+
+        # Add data points with tooltips
+        for px, py in points:
+            svg.append(f'  <circle cx="{px}" cy="{py}" r="2" fill="{theme.accent_cyan}" opacity="0.8"/>')
+
+        # Sparkline Label
+        svg.append(
+            f'  <text x="{margin_x}" y="{sparkline_top - 6}" class="mono" font-size="9" fill="{theme.text_muted}">'
+            f'📈 30-Day Activity Sparkline (Max: {max_count} commits/day)'
+            f'</text>'
+        )
+
     # ── Legend ──
     legend_y = height - 30
-    lx = MARGIN_X
+    lx = margin_x
 
-    svg.append(f'  <text x="{lx}" y="{legend_y}" class="mono" font-size="10" fill="#484f58">Less</text>')
+    svg.append(f'  <text x="{lx}" y="{legend_y}" class="mono" font-size="10" fill="{theme.text_muted}">Less</text>')
     lx += 35
-    for i, color in enumerate(LEVELS):
+    for color in levels:
         svg.append(f'  <rect x="{lx}" y="{legend_y - 10}" width="12" height="12" rx="2" fill="{color}"/>')
         lx += 17
-    svg.append(f'  <text x="{lx + 3}" y="{legend_y}" class="mono" font-size="10" fill="#484f58">More</text>')
+    svg.append(f'  <text x="{lx + 3}" y="{legend_y}" class="mono" font-size="10" fill="{theme.text_muted}">More</text>')
 
     # ── Footer stats row ──
     footer_y = height - 12
     svg.append(
-        f'  <text x="{MARGIN_X}" y="{footer_y}" class="mono" font-size="10" fill="#484f58">'
+        f'  <text x="{margin_x}" y="{footer_y}" class="mono" font-size="10" fill="{theme.text_dim}">'
         f'Repos: {stats.public_repos} · Followers: {stats.followers} · Following: {stats.following}'
         f' · Avg: {stats.average_commits_per_active_day}/day · Peak: {stats.most_active_day}'
         f'</text>'

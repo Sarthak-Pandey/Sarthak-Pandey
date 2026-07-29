@@ -5,10 +5,7 @@ from typing import List
 from ..config import AppConfig
 from ..stats import GitHubStats
 
-
-# ── Skill → badge icon slug mapping (shields.io / simpleicons) ──
 SKILL_BADGES: dict[str, tuple[str, str]] = {
-    # (logo-slug, hex-color)
     "Python":           ("python",          "3776AB"),
     "JavaScript":       ("javascript",      "F7DF1E"),
     "C++":              ("cplusplus",        "00599C"),
@@ -45,7 +42,6 @@ SKILL_BADGES: dict[str, tuple[str, str]] = {
 
 
 def _badge_url(skill: str) -> str:
-    """Return shields.io badge URL for a skill."""
     slug, color = SKILL_BADGES.get(skill, ("", "555555"))
     label = skill.replace(" ", "%20").replace("+", "%2B")
     if slug:
@@ -54,7 +50,6 @@ def _badge_url(skill: str) -> str:
 
 
 def _badge_img(skill: str) -> str:
-    """Return a markdown image tag for a skill badge."""
     url = _badge_url(skill)
     return f'<img src="{url}" alt="{skill}" height="28"/>'
 
@@ -66,15 +61,13 @@ def render_readme_markdown(
     output_path: Path | str = "Readme.md"
 ) -> str:
     utc_now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-    L: list[str] = []  # output lines
+    L: list[str] = []
 
-    # ════════════════════════════════════════════
-    # 1.  HEADER BANNER  (terminal ascii box)
-    # ════════════════════════════════════════════
+    # ── 1. Header Banner (ASCII) ──
     L.append('<div align="center">')
     L.append("")
     L.append("```")
-    bw = 52  # inner width between │ borders
+    bw = 52
     L.append("╭" + "─" * bw + "╮")
     L.append("│" + " " * bw + "│")
     L.append("│" + f"   {config.branding.banner_title}".ljust(bw) + "│")
@@ -86,41 +79,41 @@ def render_readme_markdown(
     L.append("```")
     L.append("")
 
-    # Typing SVG header (animated gif from readme-typing-svg)
+    # Typing SVG header
     typing_lines = "%3B".join([
         "AI+Engineer+%7C+Backend+Developer",
         "Building+AI+Systems,+Agents+%26+Products",
         "LLMs+%E2%80%A2+AI+Agents+%E2%80%A2+RAG+%E2%80%A2+Backend",
     ])
     L.append(
-        f'<a href="https://github.com/Sarthak-Pandey">'
-        f'<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600'
-        f'&size=22&duration=3000&pause=1000&color=58A6FF&center=true&vCenter=true'
-        f'&multiline=true&repeat=true&width=600&height=100'
-        f'&lines={typing_lines}" alt="Typing SVG" />'
+        f'<a href="https://github.com/{config.developer.github_username}">'
+        f'<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&amp;weight=600'
+        f'&amp;size=22&amp;duration=3000&amp;pause=1000&amp;color=58A6FF&amp;center=true&amp;vCenter=true'
+        f'&amp;multiline=true&amp;repeat=true&amp;width=600&amp;height=100'
+        f'&amp;lines={typing_lines}" alt="Typing SVG" />'
         f'</a>'
     )
     L.append("")
     L.append("</div>")
     L.append("")
 
-    # ════════════════════════════════════════════
-    # 2.  CONTRIBUTION GRAPH  (animated SVG)
-    # ════════════════════════════════════════════
+    # ── 2. Contribution Graph (Dark/Light Media Query) ──
     L.append('<div align="center">')
     L.append("")
     L.append("### `$ cat contributions.log`")
     L.append("")
-    L.append('<img src="./graph.svg" width="850"/>')
+    L.append('<picture>')
+    L.append('  <source media="(prefers-color-scheme: dark)" srcset="./graph-dark.svg">')
+    L.append('  <source media="(prefers-color-scheme: light)" srcset="./graph-light.svg">')
+    L.append('  <img alt="GitHub Contributions Graph" src="./graph-dark.svg" width="850">')
+    L.append('</picture>')
     L.append("")
     L.append("</div>")
     L.append("")
     L.append("<br>")
     L.append("")
 
-    # ════════════════════════════════════════════
-    # 3.  WHOAMI PANEL  (portrait + sysinfo)
-    # ════════════════════════════════════════════
+    # ── 3. Whoami Panel (Dark/Light Media Query) ──
     L.append('<div align="center">')
     L.append("")
     L.append("### `$ living-terminal --whoami`")
@@ -128,10 +121,18 @@ def render_readme_markdown(
     L.append("<table>")
     L.append("<tr>")
     L.append('<td valign="top">')
-    L.append('<img src="./portrait.svg" width="350"/>')
+    L.append('  <picture>')
+    L.append('    <source media="(prefers-color-scheme: dark)" srcset="./portrait-dark.svg">')
+    L.append('    <source media="(prefers-color-scheme: light)" srcset="./portrait-light.svg">')
+    L.append('    <img alt="Developer Portrait" src="./portrait-dark.svg" width="350">')
+    L.append('  </picture>')
     L.append("</td>")
     L.append('<td valign="top">')
-    L.append('<img src="./sysinfo.svg" width="480"/>')
+    L.append('  <picture>')
+    L.append('    <source media="(prefers-color-scheme: dark)" srcset="./sysinfo-dark.svg">')
+    L.append('    <source media="(prefers-color-scheme: light)" srcset="./sysinfo-light.svg">')
+    L.append('    <img alt="Terminal System Information" src="./sysinfo-dark.svg" width="480">')
+    L.append('  </picture>')
     L.append("</td>")
     L.append("</tr>")
     L.append("</table>")
@@ -141,9 +142,7 @@ def render_readme_markdown(
     L.append("---")
     L.append("")
 
-    # ════════════════════════════════════════════
-    # 4.  GITHUB ANALYTICS  (stats table)
-    # ════════════════════════════════════════════
+    # ── 4. GitHub Analytics & Telemetry ──
     L.append("## 📊 GitHub Analytics & Telemetry")
     L.append("")
     L.append('<div align="center">')
@@ -161,9 +160,7 @@ def render_readme_markdown(
     L.append("---")
     L.append("")
 
-    # ════════════════════════════════════════════
-    # 5.  TECHNICAL SKILLS  (shields.io badges)
-    # ════════════════════════════════════════════
+    # ── 5. Technical Arsenal (Shields) ──
     L.append("## 🛠️ Technical Arsenal")
     L.append("")
 
@@ -179,7 +176,7 @@ def render_readme_markdown(
 
     for section_title, skills in skill_sections:
         badges = " ".join(_badge_img(s) for s in skills)
-        L.append(f"**{section_title}**")
+        L.append(f"### {section_title}")
         L.append("")
         L.append(f'<p>{badges}</p>')
         L.append("")
@@ -187,9 +184,7 @@ def render_readme_markdown(
     L.append("---")
     L.append("")
 
-    # ════════════════════════════════════════════
-    # 6.  CURRENTLY LEARNING  (checklist)
-    # ════════════════════════════════════════════
+    # ── 6. Currently Learning ──
     L.append("## 📚 Currently Learning")
     L.append("")
     for topic in learning_topics:
@@ -203,38 +198,58 @@ def render_readme_markdown(
     L.append("---")
     L.append("")
 
-    # ════════════════════════════════════════════
-    # 7.  CURRENT PROJECTS
-    # ════════════════════════════════════════════
+    # ── 7. Current Projects ──
     L.append("## 🚀 Current Projects")
     L.append("")
-    L.append("| Project | Status |")
-    L.append("| :--- | :---: |")
+    L.append("| Project | Status | Description |")
+    L.append("| :--- | :---: | :--- |")
     for proj in (config.projects or []):
         clean = re.sub(r"\s*\([^)]*\)", "", proj).strip() if "(" in proj else proj
-        L.append(f"| **{clean}** | 🔨 In Progress |")
+        desc = "Terminal-style animated profile configuration and automation." if "Living Terminal" in clean else "Aspiring AI Engineer project development."
+        L.append(f"| **{clean}** | 🔨 In Progress | {desc} |")
     L.append("")
     L.append("---")
     L.append("")
 
-    # ════════════════════════════════════════════
-    # 8.  RESEARCH INTERESTS
-    # ════════════════════════════════════════════
+    # ── 8. Research Interests ──
     L.append("## 🔬 Research Interests")
     L.append("")
     research = config.research_interests or []
     for res in research:
-        L.append(f"- 🔹 {res}")
+        L.append(f"▸ **{res}**")
+        L.append("    ◆ Advanced algorithmic architectures and engineering models.")
     L.append("")
     L.append("---")
     L.append("")
 
-    # ════════════════════════════════════════════
-    # 9.  FOOTER
-    # ════════════════════════════════════════════
+    # ── 9. Run Locally ──
+    L.append("## ⚙️ How to Run Locally")
+    L.append("")
+    L.append("You can generate and preview the animated profile assets on your local machine:")
+    L.append("")
+    L.append("1. Clone the repository and navigate to the project directory.")
+    L.append("2. Install the package and dependencies in development mode:")
+    L.append("   ```bash")
+    L.append('   pip install -e "."')
+    L.append("   ```")
+    L.append("3. Execute the generator CLI:")
+    L.append("   ```bash")
+    L.append("   living-terminal")
+    L.append("   ```")
+    L.append("   Or run via Python:")
+    L.append("   ```bash")
+    L.append("   python tools/generate_profile.py")
+    L.append("   ```")
+    L.append("")
+    L.append("---")
+    L.append("")
+
+    # ── 10. Footer ──
     L.append('<div align="center">')
     L.append("")
-    L.append(f'<sub>🕐 Last updated: {utc_now} · Generated automatically by <b>Living Terminal</b></sub>')
+    L.append("────────────────────────────────────────────────────────────────────────")
+    L.append(f"Living Terminal • v2.0 • © 2026 Sarthak Pandey")
+    L.append(f"<sub>🕐 Last updated: {utc_now} · Generated dynamically</sub>")
     L.append("")
     L.append("</div>")
     L.append("")
